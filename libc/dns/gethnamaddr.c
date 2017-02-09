@@ -165,13 +165,11 @@ dprintf(const char *msg, res_state res, ...)
 	do { \
 		BOUNDS_CHECK(cp, x); \
 		cp += (x); \
-			return NULL; \
-		} \
 	} while (/*CONSTCOND*/0)
 
 #define BOUNDS_CHECK(ptr, count) \
 	do { \
-		if (eom - (ptr) < (count)) \
+		if (eom - (ptr) < (count)) { \
 			h_errno = NO_RECOVERY; \
 			return NULL; \
 		} \
